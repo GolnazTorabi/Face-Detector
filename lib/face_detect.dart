@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:ui' as ui;
+
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class FaceDetect extends StatefulWidget {
@@ -24,10 +25,11 @@ class _FaceDetectState extends State<FaceDetect> {
     }
     setState(() {
       _imageFile = image;
-      isLoading=true;
+      isLoading = true;
     });
     detectFaces(_imageFile);
   }
+
   detectFaces(File imageFile) async {
     final image = FirebaseVisionImage.fromFile(imageFile);
     final faceDetector = FirebaseVision.instance.faceDetector();
@@ -63,16 +65,25 @@ class _FaceDetectState extends State<FaceDetect> {
               ? Center(child: Text('No image selected'))
               : Center(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
-                      FittedBox(
-                        child: SizedBox(
-                          width: _image.width.toDouble(),
-                          height: _image.height.toDouble(),
-                          child: CustomPaint(
-                            painter: FacePainter(_image, _faces),
-                          ),
-                        ),
-                      ),
+                      SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Container(
+                            constraints: BoxConstraints.expand(),
+                            child: Center(
+                              child: FittedBox(
+                                child: SizedBox(
+                                  width: _image.width.toDouble(),
+                                  height: _image.height.toDouble(),
+                                  child: CustomPaint(
+                                    painter: FacePainter(_image, _faces),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ))
                     ],
                   ),
                 ),
@@ -80,9 +91,10 @@ class _FaceDetectState extends State<FaceDetect> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           FloatingActionButton(
+            backgroundColor: Color.fromRGBO(255, 208, 11, 100),
             heroTag: null,
-            onPressed:(){
-                getImage(true);
+            onPressed: () {
+              getImage(true);
             },
             tooltip: 'Camera',
             child: Icon(Icons.add_a_photo),
@@ -91,9 +103,10 @@ class _FaceDetectState extends State<FaceDetect> {
             height: 22.0,
           ),
           FloatingActionButton(
+            backgroundColor: Color.fromRGBO(255, 208, 11, 100),
             heroTag: null,
-            onPressed:(){
-                getImage(false);
+            onPressed: () {
+              getImage(false);
             },
             tooltip: 'Gallery',
             child: Icon(Icons.folder),

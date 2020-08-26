@@ -8,6 +8,7 @@ void main() => runApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          brightness: Brightness.dark
         ),
         home: FaceDetect(),
       ),
