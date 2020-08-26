@@ -10,3 +10,4 @@
 *   Pass the converted image to the detector and get it to scan the image for possible faces.
 *   The face detector will return a list of Face class which contains the Rect coordinates.
 *   The Painter will then use these coordinates to draw a rectangular box around the faces using these coordinates
+# FaceDetection
